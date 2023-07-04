@@ -1,0 +1,31 @@
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'d-block': showModal}" (click)="closeApplyJobForm()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Apply Job</h5>
+        <button type="button" data-dismiss="modal" class="close" (click)="closeApplyJobForm()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="submitApplyJobForm()" #applyJobForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="applyFormData.name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="applyFormData.email" required>
+          </div>
+          <div class="form-group">
+            <label for="resume">Resume</label>
+            <input type="file" class="form-control-file" id="resume" name="resume" (change)="handleResumeChange($event)" required>
+            <div *ngIf="resumeReady" class="text-success">Resume ready</div>
+          </div>
+          <input type="hidden" name="id_worker" [value]="applyFormData.id_worker">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

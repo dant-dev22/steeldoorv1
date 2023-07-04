@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Job Listing</h2>
+  <table class="table table-striped">
+    <!-- Table headers -->
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Location</th>
+        <th>Position</th>
+        <th>Applicants</th>
+      </tr>
+    </thead>
+    <!-- Table body -->
+    <tbody *ngIf="jobs.length > 0; else emptyTable">
+      <tr *ngFor="let job of jobs">
+        <!-- Job data -->
+        <td>{{ job.company_name }}</td>
+        <td>{{ job.job_location }}</td>
+        <td>{{ job.job_title }}</td>
+        <td>{{ job.id_workers }}</td>
+        <td>
+          <!-- Button to delete the job -->
+          <button class="btn btn-danger" (click)="deleteWork(job._id)">Delete</button>
+          <button class="btn btn-primary" (click)="editWork(job._id)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+    <ng-template #emptyTable>
+      <tbody>
+        <tr>
+          <td colspan="5">No jobs available</td>
+        </tr>
+      </tbody>
+    </ng-template>
+  </table>
+
+  <!-- Button to open the modal -->
+  <button class="btn btn-primary" (click)="openCreateJobModal()">Create Job</button>
+</div>

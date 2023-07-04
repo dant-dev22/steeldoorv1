@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>List of Jobs</h2>
+    <table class="table table-striped">
+      <!-- Table headers -->
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Location</th>
+          <th>Position</th>
+          <th>Aspirants</th>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tbody *ngIf="jobs.length > 0; else emptyTable">
+        <tr *ngFor="let job of jobs">
+          <!-- Job data -->
+          <td>{{ job.company_name }}</td>
+          <td>{{ job.job_location }}</td>
+          <td>{{ job.job_title }}</td>
+          <td>{{ job.id_workers }}</td>
+          <td>
+            <!-- Button to apply for the job -->
+            <button class="btn btn-primary" (click)="openApplyJobModal(job._id)">Apply to this job</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #emptyTable>
+        <tbody>
+          <tr>
+            <td colspan="5">No jobs available</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  
+    <!-- Add the modal component -->
+    <app-apply-job-modal (applied)="getJobs()" [showModal]="showApplyJobModal"></app-apply-job-modal>
+  </div>
+  
